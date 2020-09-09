@@ -1,0 +1,15 @@
+.nav-item{
+    padding:2px;
+    margin-left: 7px;
+}
+.language {
+    width: 100%;
+}
+
+.language a{
+    color: #fff;
+}
+
+.language .dropdown-menu a{
+    color: #000;
+}

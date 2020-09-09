@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">{{ 'books_management' | translate }}</a>
+
+    <ul class="nav justify-content-end pull-right language">
+        <li class="nav-item dropdown">
+            <a *ngIf="currentLang == 'en'" class="nav-link dropdown-toggle" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</a>
+            <a *ngIf="currentLang == 'pl'" class="nav-link dropdown-toggle" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Polish</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown09">
+                <a  *ngIf="currentLang == 'pl'" class="dropdown-item" (click)="useLanguage('en')">English</a>
+                <a  *ngIf="currentLang == 'en'" class="dropdown-item" (click)="useLanguage('pl')">Polish</a>
+            </div>
+        </li>
+    </ul>
+</nav>

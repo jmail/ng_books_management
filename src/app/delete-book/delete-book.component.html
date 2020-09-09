@@ -1,0 +1,12 @@
+<p-dialog [visible]=true [modal]=true [closable]=false [style]="{width: '50vw'}" position="top" modal="modal" [responsive]="true">
+    <p-header>
+        {{ 'delete_book' | translate }}
+    </p-header>
+    <div class="content" style="padding: 1rem;">
+        <p class="alert">{{ 'delete_message' | translate }}: {{bookSelected.name}}</p>
+    </div>
+    <p-footer>
+        <button (click)="onCancel()" pButton label="{{ 'cancel' | translate }}" class="p-button-secondary" id="cancelNewBook"></button>
+        <button (click)="onConfirmDelete()" pButton label="{{ 'delete' | translate }}" class="p-button-danger" id="confirmDeleteBook"></button>
+    </p-footer>
+</p-dialog>

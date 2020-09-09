@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">{{ 'books_list' | translate }}
+                    <button id="openModalAgain" style="float: right" type="button" class="btn btn-primary" (click)="this.showCreateBook = !this.showCreateBook">
+                        <i class="fa fa-plus"></i>  {{ 'add_new_book' | translate }}
+                    </button>
+                </div>
+                <div class="card-body">
+
+                    <p-table #dt1 [value]="books" selectionMode="single" [(selection)]="selectedBook" dataKey="id" styleClass="p-datatable-gridlines"
+                             [rowsPerPageOptions]="[5,10,20,50,100]" [rows]="10" [paginator]="true" stateStorage="local" stateKey="statedemo-local" [loading]="loading">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="id">{{ 'id' | translate }} <p-sortIcon field="id"></p-sortIcon></th>
+                                <th pSortableColumn="name">{{ 'name' | translate }} <p-sortIcon field="name"></p-sortIcon></th>
+                                <th pSortableColumn="name">{{ 'category_name' | translate }} <p-sortIcon field="categoryName"></p-sortIcon></th>
+                                <th>{{ 'actions' | translate }}</th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <input pInputText type="text" (input)="dt1.filter($event.target.value, 'id', 'contains')" [value]="dt1.filters['id']?.value" placeholder="{{ 'search_by_id' | translate }}" class="p-column-filter form-control">
+                                </th>
+                                <th>
+                                    <input pInputText type="text" (input)="dt1.filter($event.target.value, 'name', 'contains')" [value]="dt1.filters['name']?.value" placeholder="{{ 'search_by_name' | translate }}" class="p-column-filter form-control">
+                                </th>
+                                <th>
+                                    <input pInputText type="text" (input)="dt1.filter($event.target.value, 'categoryName', 'contains')" [value]="dt1.filters['categoryName']?.value" placeholder="{{ 'search_by_category_name' | translate }}" class="p-column-filter form-control">
+                                </th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-book>
+                            <tr [pSelectableRow]="book" (mouseover)="selectBook(book)">
+                                <td>
+                                    {{book.id}}
+                                </td>
+                                <td>
+                                    {{book.name}}
+                                </td>
+                                <td>
+                                    {{book.categoryName}}
+                                </td>
+                                <td>
+                                    <button class="btn btn-info" data-toggle="modal" (click)="editBook = !editBook"> <i class="fa fa-edit"></i> {{ 'edit' | translate }} </button>
+                                    <button class="btn btn-danger" (click)="this.deleteBook = !this.deleteBook"> <i class="fa fa-trash"></i> {{ 'delete' | translate }} </button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4">{{ 'no_books_found' | translate }}.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-create-book *ngIf="showCreateBook" (newBookAdded)="newBookAdded()" (hideCreateBook)="showCreateBook = false"></app-create-book>
+<app-update-book *ngIf="editBook && bookSelected" [bookSelected]="bookSelected" (bookUpdated)="bookUpdated()" (cancel)="editBook = false"></app-update-book>
+<app-delete-book *ngIf="deleteBook" [bookSelected]="bookSelected" (bookDeleted)="bookDeleted()" (cancelDeleteBook)="deleteBook = false"></app-delete-book>

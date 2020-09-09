@@ -1,0 +1,6 @@
+﻿<div *ngIf="message && message.text" [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
+    {{message.text}}
+    <button (click)="message = !message" class="close-alert">
+        <i class="fa fa-remove"></i>
+    </button>
+</div>

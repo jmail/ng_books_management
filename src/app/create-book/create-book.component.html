@@ -1,0 +1,22 @@
+<p-dialog [visible]=true [modal]=true [closable]=false [style]="{width: '50vw'}" position="top" modal="modal" [responsive]="true">
+    <p-header>
+        {{ 'add_new_book' | translate }}
+    </p-header>
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit(bookForm.value)" autocomplete="disabled" autofill="disabled" aria-labelledby="title">
+        <div class="form-group">
+            <label for="selectedCategory">Category</label>
+            <p-dropdown appendTo="body" [options]="categories" required id="selectedCategory"  placeholder="{{ 'select_category' | translate }}" [showClear]="true"
+                        name="selectedCategory" formControlName="selectedCategory" [style]="{'width':'100%'}"></p-dropdown>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" required formControlName="name" name="name" id="name" aria-describedby="name" placeholder="{{ 'enter_book_name' | translate }}">
+        </div>
+
+        <p-footer>
+            <button (click)="onCancel()" pButton label="{{ 'cancel' | translate }}" class="p-button-secondary" id="cancelNewBook"></button>
+            <button pButton label="{{ 'save' | translate }}" type="submit" [disabled]="!bookForm.valid"></button>
+        </p-footer>
+    </form>
+</p-dialog>
